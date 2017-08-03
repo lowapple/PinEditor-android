@@ -4,17 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/division_line" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
         <TextView
+            android:id="@+id/component_textview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="하단에 위차하는 옵션입니다." />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp" />
+    </LinearLayout>
 </LinearLayout>
