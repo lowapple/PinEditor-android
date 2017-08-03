@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.editor_component_textview.view.*
  * TextView
  */
 
-open class ComponentTextView : LinearLayout {
+open class ComponentTextView : ComponentBase {
     var textView: TextView? = null
 
     constructor(context: Context) : super(context) {
@@ -33,10 +33,11 @@ open class ComponentTextView : LinearLayout {
     }
 
     fun init() {
-        var li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view = li.inflate(R.layout.editor_component_textview, this, false)
-        textView = view.component_textview
+        componentType = ComponentType.TextView
 
+        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = li.inflate(R.layout.editor_component_textview, this, false)
+        textView = view.component_textview
 
         addView(view)
     }
