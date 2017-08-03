@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 open class ComponentEditText : ComponentBase {
     var li: LayoutInflater? = null
     var editText: EditText? = null
-    var mView: View? = null
 
     constructor(context: Context) {
         init(context)
@@ -31,12 +30,12 @@ open class ComponentEditText : ComponentBase {
 
     fun init(context: Context) {
         li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        mView = li!!.inflate(R.layout.editor_component_edittext, null)
-        editText = mView!!.component_edittext
+        componentView = li!!.inflate(R.layout.editor_component_edittext, null)
+        editText = componentView!!.component_edittext
         componentType = ComponentType.EditText
     }
 
     fun getView(): View? {
-        return mView
+        return componentView
     }
 }

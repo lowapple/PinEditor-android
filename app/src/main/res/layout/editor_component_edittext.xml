@@ -14,11 +14,8 @@
             android:id="@+id/component_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
-            android:imeOptions="actionDone"
-            android:background="@null"/>
+            android:background="@null"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false" />
     </LinearLayout>
 </LinearLayout>

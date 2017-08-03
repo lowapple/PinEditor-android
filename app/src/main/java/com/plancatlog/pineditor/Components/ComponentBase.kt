@@ -6,6 +6,7 @@ import android.support.v4.widget.CompoundButtonCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.plancatlog.pineditor.R
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
 open class ComponentBase {
     var componentType = ComponentType.None
+    var componentView: View? = null
 
     fun log() {
         Log.i("Component", componentType.toString() + " : " + logString())
