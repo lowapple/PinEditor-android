@@ -10,13 +10,15 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <TextView
-            android:id="@+id/component_textview"
+        <EditText
+            android:id="@+id/component_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp" />
+            android:layout_marginTop="0dp"
+            android:imeOptions="actionDone"
+            android:background="@null"/>
     </LinearLayout>
 </LinearLayout>

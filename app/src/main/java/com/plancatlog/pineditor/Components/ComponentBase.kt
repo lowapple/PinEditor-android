@@ -9,31 +9,14 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.plancatlog.pineditor.R
-import kotlinx.android.synthetic.main.editor_component_textview.view.*
+import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
 /**
  * Created by plancatlog on 2017. 8. 3..
  */
 
-open class ComponentBase : LinearLayout {
-    var attributeSet: AttributeSet? = null
-    var defStyle: Int? = null
+open class ComponentBase {
     var componentType = ComponentType.None
-
-    constructor(context: Context) : super(context) {
-        this.attributeSet = null
-        this.defStyle = null
-    }
-
-    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
-        this.attributeSet = attributeSet
-        this.defStyle = null
-    }
-
-    constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(context, attributeSet, defStyle) {
-        this.attributeSet = attributeSet
-        this.defStyle = defStyle
-    }
 
     fun log() {
         Log.i("Component", componentType.toString() + " : " + logString())
@@ -41,9 +24,9 @@ open class ComponentBase : LinearLayout {
 
     fun logString(): String {
         when (componentType) {
-            ComponentType.TextView -> {
-                val component = this as ComponentTextView
-                return component.textView!!.text.toString()
+            ComponentType.EditText -> {
+                val component = this as ComponentEditText
+                return component.editText!!.text.toString()
             }
         }
         return "";

@@ -6,5 +6,5 @@ package com.plancatlog.pineditor.Components
 
 enum class ComponentType {
     None,
-    TextView
+    EditText
 }

@@ -4,36 +4,7 @@
     android:id="@+id/editor_component_contents_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
 
-    <com.plancatlog.pineditor.Components.ComponentTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="테스트 테스트 안녕 ㅎㅎ 테스트 0"
-        app:textColor="@android:color/black" />
-
-    <com.plancatlog.pineditor.Components.ComponentTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="테스트 테스트 안녕 ㅎㅎ 테스트 1"
-        app:textColor="@android:color/black" />
-
-    <com.plancatlog.pineditor.Components.ComponentTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="테스트 테스트 안녕 ㅎㅎ 테스트 2"
-        app:textColor="@android:color/black" />
-
-    <com.plancatlog.pineditor.Components.ComponentTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="테스트 테스트 안녕 ㅎㅎ 테스트 3"
-        app:textColor="@android:color/black" />
-
-    <com.plancatlog.pineditor.Components.ComponentTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="테스트 테스트 안녕 ㅎㅎ 테스트 4"
-        app:textColor="@android:color/black" />
 </LinearLayout>
