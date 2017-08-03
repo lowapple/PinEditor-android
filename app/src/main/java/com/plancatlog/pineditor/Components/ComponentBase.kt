@@ -2,7 +2,9 @@ package com.plancatlog.pineditor.Components
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.support.v4.widget.CompoundButtonCompat
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -31,5 +33,19 @@ open class ComponentBase : LinearLayout {
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(context, attributeSet, defStyle) {
         this.attributeSet = attributeSet
         this.defStyle = defStyle
+    }
+
+    fun log() {
+        Log.i("Component", componentType.toString() + " : " + logString())
+    }
+
+    fun logString(): String {
+        when (componentType) {
+            ComponentType.TextView -> {
+                val component = this as ComponentTextView
+                return component.textView!!.text.toString()
+            }
+        }
+        return "";
     }
 }

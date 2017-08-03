@@ -27,25 +27,25 @@ class EditorActivity : AppCompatActivity() {
         editorComponentsScrollView = editor_compoonent_contents_layout
 
         // 현재 추가된 컴포넌트들을 List에 넣는다
-        reloadComponent()
+        componentReload()
     }
 
-    fun reloadComponent() {
+    fun componentReload() {
         componentList.clear()
         for (i in 0..editorComponents.childCount - 1) {
             val component = editorComponents.getChildAt(i) as ComponentBase
-            Log.i("Component", "Component {$i} " + component.componentType.toString())
+            Log.i("Component", "Component {$i} " + component.componentType.toString() + " : " + component.logString())
             componentList.add(component)
         }
     }
 
-    fun swapComponent(p0: Int, p1: Int) {
+    fun componentSwap(p0: Int, p1: Int) {
         val component = componentList[p0]
         val prevComponent = componentList[p1]
         editorComponents.removeView(component)
         editorComponents.removeView(prevComponent)
         editorComponents.addView(component, p1 - 1)
         editorComponents.addView(prevComponent, p0)
-        reloadComponent()
+        componentReload()
     }
 }
