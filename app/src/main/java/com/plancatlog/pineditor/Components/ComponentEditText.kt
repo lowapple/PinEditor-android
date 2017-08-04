@@ -21,21 +21,20 @@ import kotlinx.android.synthetic.main.editor_component_edittext.view.*
  */
 
 open class ComponentEditText : ComponentBase {
-    var li: LayoutInflater? = null
-    var editText: EditText? = null
+    private lateinit var editText: EditText
 
     constructor(context: Context) {
         init(context)
     }
 
-    fun init(context: Context) {
-        li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        componentView = li!!.inflate(R.layout.editor_component_edittext, null)
-        editText = componentView!!.component_edittext
-        componentType = ComponentType.EditText
-    }
+    fun EditText(): EditText = editText
 
-    fun getView(): View? {
-        return componentView
+    override fun init(context: Context) {
+        super.init(context)
+        this.setView(R.layout.editor_component_edittext)
+        this.setType(ComponentType.EditText)
+
+        // Set
+        editText = getView()!!.component_edittext
     }
 }

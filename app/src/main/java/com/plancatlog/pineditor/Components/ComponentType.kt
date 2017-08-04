@@ -6,5 +6,6 @@ package com.plancatlog.pineditor.Components
 
 enum class ComponentType {
     None,
-    EditText
+    EditText,
+    MediaImage
 }
