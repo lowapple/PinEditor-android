@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PinEditor</string>
+    <string name="editor_title">제목</string>
+    <string name="editor_sub_title">소제목</string>
 </resources>

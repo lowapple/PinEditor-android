@@ -3,21 +3,22 @@ package com.plancatlog.pineditor.Components
 import android.content.Context
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.widget.LinearLayout
+import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 import com.plancatlog.pineditor.R
 
 /**
  * Created by plancatlog on 2017. 8. 3..
  */
 
-class ComponentFactory {
+class ComponentFactory(context: Context) {
     private var parent: LinearLayout? = null
     private var context: Context? = null
 
-    // 컴포넌트가 추가될 때
-    private var addComponentCallback: (() -> Unit)? = null
+    val componentList = arrayListOf<ComponentBase>()
 
-    constructor(context: Context) {
+    init {
         this.context = context
     }
 
@@ -27,10 +28,6 @@ class ComponentFactory {
     }
 
     // ========
-
-    fun setComponentAddCallback(callback: (() -> Unit)) {
-        addComponentCallback = callback
-    }
 
     fun addEditText(childN: Int): Boolean {
         if (context != null && parent != null) {
@@ -42,36 +39,8 @@ class ComponentFactory {
 
             Log.i("Editor", component.EditText().toString())
 
-            component.EditText().setOnKeyListener { editText, i, keyEvent ->
-                if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
-                    if (i == KeyEvent.KEYCODE_ENTER) {
-                        Log.i("Component", "New Component")
-                        val currentChildN = this.parent!!.indexOfChild(view)
-
-                        // 새 Edit Text생성
-                        addEditText(currentChildN + 1)
-                        return@setOnKeyListener true
-                    }
-                }
-                return@setOnKeyListener false
-            }
-
-            // EditText는 엔터 시 새로운 EditText가 생성 됨
-            //component.EditText().setOnKeyListener { textView, i, keyEvent ->
-            //    if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
-            //        if (i == KeyEvent.KEYCODE_ENTER) {
-            //            Log.i("Component", "New Component")
-            //            val currentChildN = this.parent!!.indexOfChild(view)
-            //            // 새 Edit Text생성
-            //            addEditText(currentChildN + 1)
-            //            return@setOnKeyListener true
-            //        }
-            //    }
-            //    return@setOnKeyListener false
-            //}
-
-            parent!!.addView(view, childN)
-            CallbackInvoke()
+            this.addView(view, childN)
+            this.componentReload()
             return true
         }
         return false
@@ -92,15 +61,51 @@ class ComponentFactory {
             // ===== SetImage
             component.setImage(R.drawable.test1)
 
-            parent!!.addView(view, childN)
-            CallbackInvoke()
+            this.addView(view, childN)
+            this.componentReload()
             return true
         }
         return false
     }
 
-    private fun CallbackInvoke() {
-        if (addComponentCallback != null)
-            addComponentCallback!!.invoke()
+    fun addView(view: View, childN: Int) {
+        parent!!.addView(view, childN)
+    }
+
+    fun removeView(view: View) {
+        parent!!.removeView(view)
+    }
+
+    fun indexOfChild(view: View): Int {
+        return parent!!.indexOfChild(view)
+    }
+
+    fun getChildAt(childN: Int): View {
+        return parent!!.getChildAt(childN)
+    }
+
+    fun componentReload() {
+        componentList.clear()
+        if (parent!!.childCount > 0) {
+            for (i in 0..parent!!.childCount - 1) {
+                try {
+                    val component = parent!!.getChildAt(i).getTag() as ComponentBase
+                    Log.i("Component", "Component {$i} " + component.getType().toString() + " : " + component.logString())
+                    componentList.add(component)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    fun componentSwap(p0: Int, p1: Int) {
+        val component = componentList[p0].getView()
+        val prevComponent = componentList[p1].getView()
+        parent!!.removeView(component)
+        parent!!.removeView(prevComponent)
+        parent!!.addView(component, p1 - 1)
+        parent!!.addView(prevComponent, p0)
+        componentReload()
     }
 }

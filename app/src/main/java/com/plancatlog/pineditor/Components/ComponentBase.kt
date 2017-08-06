@@ -1,16 +1,9 @@
 package com.plancatlog.pineditor.Components
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.support.v4.widget.CompoundButtonCompat
-import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.plancatlog.pineditor.R
-import kotlinx.android.synthetic.main.editor_component_edittext.view.*
+import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 
 /**
  * Created by plancatlog on 2017. 8. 3..

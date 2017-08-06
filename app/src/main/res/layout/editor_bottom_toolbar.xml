@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/editor_basic_toolbar_size"
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 

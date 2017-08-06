@@ -28,7 +28,6 @@
         android:id="@+id/editor_compoonent_contents_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingTop="15dp"
         app:layout_constraintBottom_toTopOf="@+id/editor_bottom_toolbar_layout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,7 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editor_title_toolbar_layout">
 
         <include
-            android:id="@+id/editor_component_contents"
             layout="@layout/editor_component_contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
