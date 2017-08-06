@@ -30,6 +30,7 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
         // Set
         editText = getView()!!.component_edittext
+
     }
 
     fun requestFocus() {

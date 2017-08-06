@@ -39,6 +39,23 @@ class ComponentFactory(context: Context) {
 
             Log.i("Editor", component.EditText().toString())
 
+            component.EditText().setOnKeyListener { editText, i, keyEvent ->
+                if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
+                    val componentIdx = indexOfChild(view)
+                    if (i == KeyEvent.KEYCODE_ENTER) {
+                        // 새 Edit Text생성
+                        this.addEditText(componentIdx + 1)
+                        val nextComponent = componentList[componentIdx + 1]
+                        if (nextComponent.getType() == ComponentType.EditText)
+                            (nextComponent as ComponentEditText).requestFocus()
+                        return@setOnKeyListener true
+                    } else if (i == KeyEvent.KEYCODE_DEL) {
+                        return@setOnKeyListener true
+                    }
+                }
+                return@setOnKeyListener false
+            }
+
             this.addView(view, childN)
             this.componentReload()
             return true

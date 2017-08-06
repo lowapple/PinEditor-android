@@ -11,12 +11,13 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <EditText
+        <com.plancatlog.pineditor.Components.EditText.TextField
             android:id="@+id/editor_title_layout_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="@string/editor_title"
+            android:imeOptions="actionNone"
             android:inputType="text" />
 
         <include layout="@layout/division_line" />
@@ -29,12 +30,13 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <EditText
+        <com.plancatlog.pineditor.Components.EditText.TextField
             android:id="@+id/editor_title_layout_sub_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="@string/editor_sub_title"
+            android:imeOptions="actionNone"
             android:inputType="text" />
 
         <include layout="@layout/division_line" />
