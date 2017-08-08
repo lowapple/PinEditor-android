@@ -1,8 +1,9 @@
-package com.plancatlog.pineditor.Components
+package com.plancatlog.pineditor.Components.MediaImage
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import com.plancatlog.pineditor.Components.Base.ComponentBase
+import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.R
 import kotlinx.android.synthetic.main.editor_component_media_image.view.*
 

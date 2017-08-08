@@ -1,13 +1,14 @@
 package com.plancatlog.pineditor.Components.EditText
 
 import android.content.Context
+import android.graphics.Typeface
 import android.widget.EditText
-import android.support.v4.view.KeyEventCompat.startTracking
 import android.util.AttributeSet
 import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import com.plancatlog.pineditor.Utils.FontManager
+import com.plancatlog.pineditor.Utils.FontName
 
 open class TextField : EditText {
     lateinit var fontManager: FontManager
@@ -26,7 +27,15 @@ open class TextField : EditText {
 
     private fun init(context: Context) {
         fontManager = FontManager(context)
-        this.typeface = fontManager.getFont("NanumGothicLight")!!.fontTypeface
+        this.setFont(FontName.NanumBarunGothicUltraLight)
+        this.setImeOption()
+    }
+
+    fun setFont(fontName: FontName) {
+        this.typeface = fontManager.getFont(fontName)!!.fontTypeface
+    }
+
+    fun setImeOption() {
         this.imeOptions = EditorInfo.IME_ACTION_NONE
     }
 }

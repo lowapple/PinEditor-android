@@ -12,22 +12,22 @@ import android.util.Log
 
 
 class FontManager(context: Context) {
-    private val fonts: Map<String, Font>
+    private val fonts: Map<FontName, Font>
 
     init {
         fonts = mapOf(
-                "NanumBarunGothic" to Font("나눔바른고딕", Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothic.otf")),
-                "NanumBarunGothicLight" to Font("나눔바른고딕Light", Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicLight.otf")),
-                "NanumBarunGothicUltraLight" to Font("나눔바른고딕UltraLight", Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicUltraLight.otf")),
-                "NanumGothic" to Font("나눔고딕", Typeface.createFromAsset(context.assets, "fonts/NanumGothic.otf")),
-                "NanumGothicLight" to Font("나눔고딕Light", Typeface.createFromAsset(context.assets, "fonts/NanumGothicLight.otf"))
+                FontName.NanumBarunGothic to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothic.otf")),
+                FontName.NanumBarunGothicLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicLight.otf")),
+                FontName.NanumBarunGothicUltraLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicUltraLight.otf")),
+                FontName.NanumGothic to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothic.otf")),
+                FontName.NanumGothicLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothicLight.otf"))
         )
 
         Log.d("Font", "Init Size ${fonts.size}")
     }
 
-    fun getFont(fontName: String): Font? {
-        if(fonts.containsKey(fontName))
+    fun getFont(fontName: FontName): Font? {
+        if (fonts.containsKey(fontName))
             return fonts[fontName]
         else
             return null

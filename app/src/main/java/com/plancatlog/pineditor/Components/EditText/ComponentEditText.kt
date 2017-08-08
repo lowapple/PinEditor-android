@@ -1,10 +1,9 @@
 package com.plancatlog.pineditor.Components.EditText
 
 import android.content.Context
-import android.text.Editable
-import android.widget.EditText
-import com.plancatlog.pineditor.Components.ComponentBase
-import com.plancatlog.pineditor.Components.ComponentType
+import android.widget.LinearLayout
+import com.plancatlog.pineditor.Components.Base.ComponentBase
+import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.R
 import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
@@ -16,6 +15,7 @@ import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
 open class ComponentEditText(context: Context) : ComponentBase() {
     private lateinit var editText: TextField
+    private lateinit var background: LinearLayout
 
     init {
         this.init(context)
@@ -30,17 +30,11 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
         // Set
         editText = getView()!!.component_edittext
+        background = getView()!!.component_background
     }
 
     fun requestFocus() {
         EditText().requestFocus()
-    }
-
-    fun lastCharacterDelete() {
-        val sb = StringBuilder(EditText().text.toString())
-        val delText = sb.substring(0, sb.length - 1)
-        EditText().setText(Editable.Factory.getInstance().newEditable(delText))
-        lastCursor()
     }
 
     fun lastCursor() {

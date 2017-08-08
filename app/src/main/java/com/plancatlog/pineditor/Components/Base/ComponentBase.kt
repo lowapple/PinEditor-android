@@ -1,8 +1,9 @@
-package com.plancatlog.pineditor.Components
+package com.plancatlog.pineditor.Components.Base
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import com.plancatlog.pineditor.Components.MediaImage.ComponentMediaImage
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 
 /**

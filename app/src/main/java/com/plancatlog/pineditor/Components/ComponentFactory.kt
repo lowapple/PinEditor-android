@@ -6,7 +6,10 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import com.plancatlog.pineditor.Components.Base.ComponentBase
+import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
+import com.plancatlog.pineditor.Components.MediaImage.ComponentMediaImage
 import com.plancatlog.pineditor.R
 
 /**
@@ -67,13 +70,15 @@ class ComponentFactory(context: Context) {
                     if (i == KeyEvent.KEYCODE_DEL) {
                         val editTextString = component.EditText().text.toString()
                         val editTextCount = editTextString.length
-
                         if (editTextCount < 1) {
-                            val prevComponent = componentList[componentIdx - 1]
-                            if (prevComponent.getType() == ComponentType.EditText) {
-                                val prevComponentEditText = (prevComponent as ComponentEditText)
-                                prevComponentEditText.requestFocus()
-                                prevComponentEditText.lastCursor()
+                            // 현재 ComponentEditor가 첫번째에 위치하지 않으면
+                            if (componentIdx > 0) {
+                                val prevComponent = componentList[componentIdx - 1]
+                                if (prevComponent.getType() == ComponentType.EditText) {
+                                    val prevComponentEditText = (prevComponent as ComponentEditText)
+                                    prevComponentEditText.requestFocus()
+                                    prevComponentEditText.lastCursor()
+                                }
                             }
                             removeView(component.getView()!!)
                         }

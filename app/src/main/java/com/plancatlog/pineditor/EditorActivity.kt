@@ -1,11 +1,10 @@
-package com.plancatlog.pineditor
-
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import com.plancatlog.pineditor.Components.ComponentFactory
+import com.plancatlog.pineditor.R
 import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.editor_component_contents.*
 import kotlinx.android.synthetic.main.editor_title_layout.*
@@ -32,8 +31,8 @@ class EditorActivity : AppCompatActivity() {
 
         componentFactory = ComponentFactory(this@EditorActivity).parent(editorComponents)!!
 
-        componentFactory.addEditText(0)
-        componentFactory.addMediaImage(1)
+        componentFactory.addEditText(1)
+        componentFactory.addMediaImage(0)
 
         // 현재 추가된 컴포넌트들을 List에 넣는다
         componentFactory.componentReload()
