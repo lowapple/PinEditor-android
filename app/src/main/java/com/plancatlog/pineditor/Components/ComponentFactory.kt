@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 import com.plancatlog.pineditor.R
@@ -39,18 +40,44 @@ class ComponentFactory(context: Context) {
 
             Log.i("Editor", component.EditText().toString())
 
+            component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
+                val isEnterEvent = keyEvent != null && keyEvent.keyCode === KeyEvent.KEYCODE_ENTER
+                val isEnterUpEvent = isEnterEvent && keyEvent.keyCode === KeyEvent.ACTION_UP
+                val isEnterDownEvent = isEnterEvent && keyEvent.keyCode === KeyEvent.ACTION_DOWN
+
+                Log.i("Editor", "${isEnterEvent}")
+                //Log.i("Editor", "${isEnterUpEvent}")
+                //Log.i("Editor", "${isEnterDownEvent}")
+
+                if (i == EditorInfo.IME_NULL) {
+                    val componentIdx = indexOfChild(view)
+                    // 새 Edit Text생성
+                    this.addEditText(componentIdx + 1)
+                    val nextComponent = componentList[componentIdx + 1]
+                    if (nextComponent.getType() == ComponentType.EditText)
+                        (nextComponent as ComponentEditText).requestFocus()
+                    return@setOnEditorActionListener false
+                }
+                return@setOnEditorActionListener false
+            }
+
             component.EditText().setOnKeyListener { editText, i, keyEvent ->
                 if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
                     val componentIdx = indexOfChild(view)
-                    if (i == KeyEvent.KEYCODE_ENTER) {
-                        // 새 Edit Text생성
-                        this.addEditText(componentIdx + 1)
-                        val nextComponent = componentList[componentIdx + 1]
-                        if (nextComponent.getType() == ComponentType.EditText)
-                            (nextComponent as ComponentEditText).requestFocus()
-                        return@setOnKeyListener true
-                    } else if (i == KeyEvent.KEYCODE_DEL) {
-                        return@setOnKeyListener true
+                    if (i == KeyEvent.KEYCODE_DEL) {
+                        val editTextString = component.EditText().text.toString()
+                        val editTextCount = editTextString.length
+
+                        if (editTextCount < 1) {
+                            val prevComponent = componentList[componentIdx - 1]
+                            if (prevComponent.getType() == ComponentType.EditText) {
+                                val prevComponentEditText = (prevComponent as ComponentEditText)
+                                prevComponentEditText.requestFocus()
+                                prevComponentEditText.lastCursor()
+                            }
+                            removeView(component.getView()!!)
+                        }
+                        return@setOnKeyListener false
                     }
                 }
                 return@setOnKeyListener false

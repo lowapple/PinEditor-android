@@ -30,7 +30,6 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
         // Set
         editText = getView()!!.component_edittext
-
     }
 
     fun requestFocus() {
@@ -41,6 +40,10 @@ open class ComponentEditText(context: Context) : ComponentBase() {
         val sb = StringBuilder(EditText().text.toString())
         val delText = sb.substring(0, sb.length - 1)
         EditText().setText(Editable.Factory.getInstance().newEditable(delText))
+        lastCursor()
+    }
+
+    fun lastCursor() {
         EditText().setSelection(EditText().length())
     }
 }

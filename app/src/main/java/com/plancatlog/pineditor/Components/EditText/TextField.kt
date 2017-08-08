@@ -6,6 +6,7 @@ import android.support.v4.view.KeyEventCompat.startTracking
 import android.util.AttributeSet
 import android.util.Log
 import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import com.plancatlog.pineditor.Utils.FontManager
 
 open class TextField : EditText {
@@ -25,34 +26,7 @@ open class TextField : EditText {
 
     private fun init(context: Context) {
         fontManager = FontManager(context)
-
         this.typeface = fontManager.getFont("NanumGothicLight")!!.fontTypeface
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            event!!.startTracking()
-
-            Log.i("KeyEvent", "Down")
-            return true
-        }
-        return super.onKeyDown(keyCode, event)
-    }
-
-    override fun onKeyLongPress(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            return true
-        }
-        return super.onKeyLongPress(keyCode, event)
-    }
-
-    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            event!!.startTracking()
-
-            Log.i("KeyEvent", "Up")
-            return true
-        }
-        return super.onKeyUp(keyCode, event)
+        this.imeOptions = EditorInfo.IME_ACTION_NONE
     }
 }
