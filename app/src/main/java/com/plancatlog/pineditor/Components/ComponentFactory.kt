@@ -118,7 +118,8 @@ class ComponentFactory(context: Context) {
     }
 
     fun addView(view: View, childN: Int) {
-        parent!!.addView(view, childN)
+        if (componentList.size >= childN)
+            parent!!.addView(view, childN)
     }
 
     fun removeView(view: View) {

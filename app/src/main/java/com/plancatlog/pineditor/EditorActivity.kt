@@ -1,5 +1,8 @@
-import android.support.v7.app.AppCompatActivity
+package com.plancatlog.pineditor
+
 import android.os.Bundle
+import android.support.design.widget.BottomSheetDialog
+import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -9,8 +12,7 @@ import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.editor_component_contents.*
 import kotlinx.android.synthetic.main.editor_title_layout.*
 
-class EditorActivity : AppCompatActivity() {
-
+open class EditorActivity : AppCompatActivity() {
     lateinit var editorComponents: LinearLayout
     lateinit var editorComponentsScrollView: ScrollView
     lateinit var componentFactory: ComponentFactory
@@ -36,5 +38,11 @@ class EditorActivity : AppCompatActivity() {
 
         // 현재 추가된 컴포넌트들을 List에 넣는다
         componentFactory.componentReload()
+
+        // =====================================
+        val bottomSeet = BottomSheetDialog(this)
+        val bottomView = this.layoutInflater.inflate(R.layout.editor_toolbar_contents, null)
+        bottomSeet.setContentView(bottomView)
+        bottomSeet.show()
     }
 }

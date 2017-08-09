@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.plancatlog.pineditor.EditorActivity">
+    tools:context="EditorActivity">
 
     <LinearLayout
         android:id="@+id/editor_title_toolbar_layout"
