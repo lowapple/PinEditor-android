@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editor_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="EditorActivity">
@@ -37,7 +38,9 @@
         <include
             layout="@layout/editor_component_contents"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="310dp" />
     </ScrollView>
 
     <LinearLayout
@@ -51,6 +54,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <include layout="@layout/editor_bottom_toolbar" />
+        <include
+            layout="@layout/editor_bottom_toolbar" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
