@@ -12,6 +12,7 @@ import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 import com.plancatlog.pineditor.Components.MediaImage.ComponentMediaImage
 import com.plancatlog.pineditor.R
+import com.plancatlog.pineditor.Toolbar.ToolbarFactory
 
 /**
  * Created by plancatlog on 2017. 8. 3..
@@ -20,8 +21,6 @@ import com.plancatlog.pineditor.R
 class ComponentFactory(context: Context) {
     private var parent: LinearLayout? = null
     private var context: Context? = null
-
-    lateinit var toolbarPopupCallback: (() -> Unit)
 
     val componentList = arrayListOf<ComponentBase>()
 
@@ -34,37 +33,16 @@ class ComponentFactory(context: Context) {
         return this
     }
 
-    // ========
-
     fun addEditText(childN: Int): Boolean {
         if (context != null && parent != null) {
             val component = ComponentEditText(context!!)
-            // Component 생성 후
-            // View의 Tag에 넣음
             val view = component.getView()
-            view!!.setTag(component)
-
-            Log.i("Editor", component.EditText().toString())
-            component.EditText().setOnClickListener {
-                toolbarPopupCallback.invoke()
-            }
-            component.EditText().setOnFocusChangeListener { view, b ->
-                if (b)
-                    toolbarPopupCallback.invoke()
-            }
+            view?.setTag(component)
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
-                val isEnterEvent = keyEvent != null && keyEvent.keyCode === KeyEvent.KEYCODE_ENTER
-                val isEnterUpEvent = isEnterEvent && keyEvent.keyCode === KeyEvent.ACTION_UP
-                val isEnterDownEvent = isEnterEvent && keyEvent.keyCode === KeyEvent.ACTION_DOWN
-
-                Log.i("Editor", "${isEnterEvent}")
-                //Log.i("Editor", "${isEnterUpEvent}")
-                //Log.i("Editor", "${isEnterDownEvent}")
-
                 if (i == EditorInfo.IME_NULL) {
-                    val componentIdx = indexOfChild(view)
-                    // 새 Edit Text생성
+                    val componentIdx = indexOfChild(view!!)
                     this.addEditText(componentIdx + 1)
+
                     val nextComponent = componentList[componentIdx + 1]
                     if (nextComponent.getType() == ComponentType.EditText)
                         (nextComponent as ComponentEditText).requestFocus()
@@ -75,7 +53,7 @@ class ComponentFactory(context: Context) {
 
             component.EditText().setOnKeyListener { editText, i, keyEvent ->
                 if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
-                    val componentIdx = indexOfChild(view)
+                    val componentIdx = indexOfChild(view!!)
                     if (i == KeyEvent.KEYCODE_DEL) {
                         val editTextString = component.EditText().text.toString()
                         val editTextCount = editTextString.length
@@ -97,7 +75,7 @@ class ComponentFactory(context: Context) {
                 return@setOnKeyListener false
             }
 
-            this.addView(view, childN)
+            this.addView(view!!, childN)
             this.componentReload()
             return true
         }
@@ -128,11 +106,11 @@ class ComponentFactory(context: Context) {
 
     fun addView(view: View, childN: Int) {
         if (componentList.size >= childN)
-            parent!!.addView(view, childN)
+            parent?.addView(view, childN)
     }
 
     fun removeView(view: View) {
-        parent!!.removeView(view)
+        parent?.removeView(view)
     }
 
     fun indexOfChild(view: View): Int {
@@ -161,10 +139,10 @@ class ComponentFactory(context: Context) {
     fun componentSwap(p0: Int, p1: Int) {
         val component = componentList[p0].getView()
         val prevComponent = componentList[p1].getView()
-        parent!!.removeView(component)
-        parent!!.removeView(prevComponent)
-        parent!!.addView(component, p1 - 1)
-        parent!!.addView(prevComponent, p0)
+        parent?.removeView(component)
+        parent?.removeView(prevComponent)
+        parent?.addView(component, p1 - 1)
+        parent?.addView(prevComponent, p0)
         componentReload()
     }
 }
