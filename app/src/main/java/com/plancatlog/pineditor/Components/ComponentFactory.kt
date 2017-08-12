@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import com.plancatlog.pineditor.Components.Base.ComponentBase
 import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
@@ -19,6 +20,8 @@ import com.plancatlog.pineditor.R
 class ComponentFactory(context: Context) {
     private var parent: LinearLayout? = null
     private var context: Context? = null
+
+    lateinit var toolbarPopupCallback: (() -> Unit)
 
     val componentList = arrayListOf<ComponentBase>()
 
@@ -42,7 +45,13 @@ class ComponentFactory(context: Context) {
             view!!.setTag(component)
 
             Log.i("Editor", component.EditText().toString())
-
+            component.EditText().setOnClickListener {
+                toolbarPopupCallback.invoke()
+            }
+            component.EditText().setOnFocusChangeListener { view, b ->
+                if (b)
+                    toolbarPopupCallback.invoke()
+            }
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
                 val isEnterEvent = keyEvent != null && keyEvent.keyCode === KeyEvent.KEYCODE_ENTER
                 val isEnterUpEvent = isEnterEvent && keyEvent.keyCode === KeyEvent.ACTION_UP

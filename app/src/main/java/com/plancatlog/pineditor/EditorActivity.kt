@@ -20,6 +20,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.*
+import kotlinx.android.synthetic.main.editor_bottom_toolbar.view.*
 
 
 open class EditorActivity : AppCompatActivity() {
@@ -52,15 +53,25 @@ open class EditorActivity : AppCompatActivity() {
         // =====================================
 
         componentFactory = ComponentFactory(this@EditorActivity).parent(editorComponents)!!
+        componentFactory.toolbarPopupCallback = {
+            toolbarPopup.dismiss()
+        }
+
         componentFactory.addMediaImage(0)
         componentFactory.addEditText(1)
-        // 현재 추가된 컴포넌트들을 List에 넣는다
         componentFactory.componentReload()
+
+        editor_bottom_toolbar.toolbar_image.setOnClickListener {
+            toolbarPopup.height = keyboardHeight - toolbarHeight
+            toolbarPopup.showAtLocation(
+                    editor_parent,
+                    Gravity.BOTTOM,
+                    0, 0)
+        }
 
         // =====================================
         val MIN_KEYBOARD_HEIGHT_PX = 150
         val decorView = getWindow().getDecorView()
-
         decorView.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             private val windowVisibleDisplayFrame = Rect()
             private var lastVisibleDecorViewHeight: Int = 0
@@ -73,11 +84,6 @@ open class EditorActivity : AppCompatActivity() {
                         val currentKeyboardHeight = decorView.getHeight() - windowVisibleDisplayFrame.bottom
                         Log.i("Keyboard", currentKeyboardHeight.toString())
                         keyboardHeight = currentKeyboardHeight
-                        toolbarPopup.height = keyboardHeight - toolbarHeight
-                        toolbarPopup.showAtLocation(
-                                editor_parent,
-                                Gravity.BOTTOM,
-                                0, 0)
                     } else if (lastVisibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX < visibleDecorViewHeight) {
                         toolbarPopup.dismiss()
                     }
