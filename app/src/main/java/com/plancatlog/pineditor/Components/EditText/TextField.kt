@@ -26,7 +26,7 @@ open class TextField : EditText {
     }
 
     private fun init(context: Context) {
-        fontManager = FontManager(context)
+        fontManager = FontManager.GetInstance(context)
         this.setFont(FontName.NanumBarunGothicUltraLight)
         this.setImeOption()
     }

@@ -32,4 +32,14 @@ class FontManager(context: Context) {
         else
             return null
     }
+
+    companion object {
+        var instance: FontManager? = null
+
+        fun GetInstance(context: Context): FontManager {
+            if (instance == null)
+                instance = FontManager(context)
+            return instance!!
+        }
+    }
 }

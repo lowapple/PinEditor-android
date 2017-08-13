@@ -38,11 +38,13 @@ class ComponentFactory(context: Context) {
             val component = ComponentEditText(context!!)
             val view = component.getView()
             view?.setTag(component)
+
+            component.EditText().setImeOption()
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
+                Log.i("Action Listener", i.toString())
                 if (i == EditorInfo.IME_NULL) {
                     val componentIdx = indexOfChild(view!!)
                     this.addEditText(componentIdx + 1)
-
                     val nextComponent = componentList[componentIdx + 1]
                     if (nextComponent.getType() == ComponentType.EditText)
                         (nextComponent as ComponentEditText).requestFocus()
@@ -52,9 +54,12 @@ class ComponentFactory(context: Context) {
             }
 
             component.EditText().setOnKeyListener { editText, i, keyEvent ->
+                Log.i("KeyEvent listener", "key enter")
                 if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
+                    Log.i("KeyEvent action", keyEvent!!.action.toString())
                     val componentIdx = indexOfChild(view!!)
                     if (i == KeyEvent.KEYCODE_DEL) {
+                        Log.i("KeyEvent del", i.toString())
                         val editTextString = component.EditText().text.toString()
                         val editTextCount = editTextString.length
                         if (editTextCount < 1) {

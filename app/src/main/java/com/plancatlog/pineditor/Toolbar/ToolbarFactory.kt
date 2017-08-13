@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_editor.view.*
 
 class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     var toolbarImage: ToolbarImage? = null
+
     var keyboardHeight = 0
     val activity = activity
     val toolbarLayout = toolbarLayout
@@ -51,8 +52,12 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
                     if (lastVisibleDecorViewHeight > visibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX) {
                         val currentKeyboardHeight = decorView.getHeight() - windowVisibleDisplayFrame.bottom
                         Log.i("Keyboard", currentKeyboardHeight.toString())
-                        keyboardHeight = currentKeyboardHeight - toolbarHeight
-
+                        Log.i("HasNavBar", hasNavBar().toString())
+                        keyboardHeight = currentKeyboardHeight
+                        // 가상 버튼을 가지고 있을 때
+                        // popup Window가 하단 바를 가리는것을 막음
+                        if (hasNavBar())
+                            keyboardHeight -= toolbarHeight
                         toolbarImage?.setHeight(keyboardHeight)
                     } else if (lastVisibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX < visibleDecorViewHeight) {
                         toolbarImage?.dismiss()
@@ -61,5 +66,12 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
                 lastVisibleDecorViewHeight = visibleDecorViewHeight
             }
         })
+    }
+
+    // 하단에 존재하는 Software키의 유무를 파악한다
+    private fun hasNavBar(): Boolean {
+        val id: Int = activity.resources.getIdentifier("config_showNavigationBar", "bool", "android")
+        val idb: Boolean = activity.resources.getBoolean(id)
+        return (id > 0) && idb
     }
 }

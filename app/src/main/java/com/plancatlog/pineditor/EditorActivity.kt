@@ -38,8 +38,7 @@ open class EditorActivity : AppCompatActivity() {
             componentFactory.lastComponentRequest()
         }
 
-        componentFactory.addMediaImage(0)
-        componentFactory.addEditText(1)
+        componentFactory.addEditText(0)
         componentFactory.componentReload()
     }
 }
