@@ -5,13 +5,21 @@ import android.graphics.Typeface
 import android.widget.EditText
 import android.util.AttributeSet
 import android.util.Log
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import com.plancatlog.pineditor.Utils.FontManager
 import com.plancatlog.pineditor.Utils.FontName
 
 open class TextField : EditText {
+    enum class TextAlign {
+        LEFT,
+        CENTER,
+        RIGHT
+    }
+
     lateinit var fontManager: FontManager
+    var textAlign = TextAlign.LEFT
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -37,5 +45,35 @@ open class TextField : EditText {
 
     fun setImeOption() {
         this.imeOptions = EditorInfo.IME_ACTION_NONE
+    }
+
+    fun changeAlign(): TextAlign {
+        when (textAlign) {
+            TextAlign.LEFT -> {
+                textAlign = TextAlign.CENTER
+                middleAlign()
+            }
+            TextAlign.CENTER -> {
+                textAlign = TextAlign.RIGHT
+                rightAlign()
+            }
+            TextAlign.RIGHT -> {
+                textAlign = TextAlign.LEFT
+                leftAlign()
+            }
+        }
+        return textAlign
+    }
+
+    fun leftAlign() {
+        this.gravity = Gravity.LEFT
+    }
+
+    fun middleAlign() {
+        this.gravity = Gravity.CENTER
+    }
+
+    fun rightAlign() {
+        this.gravity = Gravity.RIGHT
     }
 }

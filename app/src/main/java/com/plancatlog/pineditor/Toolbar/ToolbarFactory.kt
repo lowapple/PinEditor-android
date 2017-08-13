@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewTreeObserver
 import com.plancatlog.pineditor.R
 import com.plancatlog.pineditor.Toolbar.Image.ToolbarImage
+import com.plancatlog.pineditor.Toolbar.TextAlign.ToolbarTextAlign
+import com.plancatlog.pineditor.Toolbar.TextOption.ToolbarTextOption
 import kotlinx.android.synthetic.main.activity_editor.view.*
+import kotlinx.android.synthetic.main.bottom_toolbar.view.*
 
 /**
  * Created by plancatlog on 2017. 8. 13..
@@ -15,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_editor.view.*
 
 class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     var toolbarImage: ToolbarImage? = null
+    var toolbarTextOption: ToolbarTextOption? = null
+    var toolbarTextAlign: ToolbarTextAlign? = null
 
     var keyboardHeight = 0
     val activity = activity
@@ -25,6 +30,9 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     init {
         toolbarHeight = activity.resources.getDimension(R.dimen.editor_basic_toolbar_size).toInt()
         setToolbarImage()
+        setToolbarTextAlign()
+        setToolbarTextOption()
+
         setKeyboardHeight()
     }
 
@@ -32,10 +40,32 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
         toolbarImage?.activity(parent)
     }
 
+    fun activityTextOptionToolbar() {
+        toolbarTextOption?.activity(parent)
+    }
+
+    fun activityTextAlignToolbar() {
+        toolbarTextAlign?.changeAlign(toolbarLayout.editor_bottom_toolbar.toolbar_text_align)
+    }
+
     private fun setToolbarImage() {
         toolbarImage = ToolbarImage(activity.applicationContext)
-        toolbarLayout.editor_bottom_toolbar.setOnClickListener {
+        toolbarLayout.editor_bottom_toolbar.toolbar_image.setOnClickListener {
             activityImageToolbar()
+        }
+    }
+
+    private fun setToolbarTextOption() {
+        toolbarTextOption = ToolbarTextOption(activity.applicationContext)
+        toolbarLayout.editor_bottom_toolbar.toolbar_text_option.setOnClickListener {
+            activityTextOptionToolbar()
+        }
+    }
+
+    private fun setToolbarTextAlign() {
+        toolbarTextAlign = ToolbarTextAlign(activity.applicationContext)
+        toolbarLayout.editor_bottom_toolbar.toolbar_text_align.setOnClickListener {
+            activityTextAlignToolbar()
         }
     }
 

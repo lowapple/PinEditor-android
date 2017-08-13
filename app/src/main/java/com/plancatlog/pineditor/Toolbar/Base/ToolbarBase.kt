@@ -28,7 +28,8 @@ open class ToolbarBase {
         toolbarPopup?.dismiss()
     }
 
-    fun activity(parent: View) {
-        toolbarPopup?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
+    open fun activity(parent: View? = null) {
+        if (parent != null)
+            toolbarPopup?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
     }
 }

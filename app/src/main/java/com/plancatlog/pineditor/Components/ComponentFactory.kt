@@ -19,6 +19,10 @@ import com.plancatlog.pineditor.Toolbar.ToolbarFactory
  */
 
 class ComponentFactory(context: Context) {
+    companion object {
+        var currentComponent: ComponentBase? = null
+    }
+
     private var parent: LinearLayout? = null
     private var context: Context? = null
 
@@ -52,7 +56,6 @@ class ComponentFactory(context: Context) {
                 }
                 return@setOnEditorActionListener false
             }
-
             component.EditText().setOnKeyListener { editText, i, keyEvent ->
                 Log.i("KeyEvent listener", "key enter")
                 if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {

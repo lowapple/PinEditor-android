@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.LinearLayout
 import com.plancatlog.pineditor.Components.Base.ComponentBase
 import com.plancatlog.pineditor.Components.Base.ComponentType
+import com.plancatlog.pineditor.Components.ComponentFactory
 import com.plancatlog.pineditor.R
 import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
@@ -30,6 +31,9 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
         // Set
         editText = getView()!!.component_edittext
+        editText.setOnClickListener {
+            ComponentFactory.currentComponent = this
+        }
         background = getView()!!.component_background
     }
 

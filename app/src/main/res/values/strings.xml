@@ -2,4 +2,21 @@
     <string name="app_name">PinEditor</string>
     <string name="editor_title">제목</string>
     <string name="editor_sub_title">소제목</string>
+
+    <string name="text_option_text_color">글 색상</string>
+    <string name="text_option_text_background_color">배경 색상</string>
+    <string name="text_option_text_bold">굵기</string>
+    <string name="text_option_text_underline">밑줄</string>
+    <string name="text_option_text_middleline">중간줄</string>
+
+    <string name="text_size_title1">제목 1</string>
+    <string name="text_size_title2">제목 2</string>
+    <string name="text_size_title3">제목 3</string>
+    <string name="text_size_body">본문</string>
+
+    <string name="text_plus_strange_text">강조</string>
+    <string name="text_plus_quote">인용</string>
+    <string name="text_plus_list">목록</string>
+    <string name="text_plus_link">링크</string>
+    <string name="text_plus_box">박스</string>
 </resources>

@@ -13,7 +13,7 @@ import com.plancatlog.pineditor.Toolbar.Base.ToolbarBase
 
 class ToolbarImage : ToolbarBase {
     constructor(context: Context) {
-        toolbarView = LayoutInflater.from(context).inflate(R.layout.bottom_toolbar_image, null)
+        toolbarView = LayoutInflater.from(context).inflate(R.layout.bottom_toolbar_text, null)
         toolbarPopup = PopupWindow(toolbarView, Toolbar.LayoutParams.MATCH_PARENT, 0, false);
     }
 }
