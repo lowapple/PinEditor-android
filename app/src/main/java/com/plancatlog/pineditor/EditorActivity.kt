@@ -6,12 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import com.plancatlog.pineditor.Components.ComponentFactory
 import kotlinx.android.synthetic.main.activity_editor.*
 import kotlinx.android.synthetic.main.editor_component_contents.*
-import kotlinx.android.synthetic.main.editor_title_layout.*
 import android.util.Log
 import android.view.*
 import android.widget.*
 import com.plancatlog.pineditor.Toolbar.ToolbarFactory
-import kotlinx.android.synthetic.main.editor_bottom_toolbar.view.*
+import kotlinx.android.synthetic.main.title_layout.*
 
 
 open class EditorActivity : AppCompatActivity() {
@@ -35,6 +34,9 @@ open class EditorActivity : AppCompatActivity() {
         toolbarFactory = ToolbarFactory(this@EditorActivity, editor_parent, editor_bottom_toolbar)
         componentFactory = ComponentFactory(this@EditorActivity).parent(editorComponents)!!
 
+        editor_enter_component.setOnClickListener {
+            componentFactory.lastComponentRequest()
+        }
 
         componentFactory.addMediaImage(0)
         componentFactory.addEditText(1)

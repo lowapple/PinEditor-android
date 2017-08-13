@@ -50,5 +50,5 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/division_line" />
+    <include layout="@layout/division_toolbar_line" />
 </LinearLayout>

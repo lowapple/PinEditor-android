@@ -22,7 +22,7 @@
                 android:id="@+id/component_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/editor_component_bottom_size"
                 android:background="@null"
                 android:imeOptions="actionNone"
                 android:inputType="text"

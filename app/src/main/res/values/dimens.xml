@@ -2,5 +2,5 @@
 <resources>
     <dimen name="editor_basic_toolbar_size">46dp</dimen>
     <dimen name="editor_basic_padding">20dp</dimen>
-    <dimen name="bottom_keyboard_height">230dp</dimen>
+    <dimen name="editor_component_bottom_size">8dp</dimen>
 </resources>

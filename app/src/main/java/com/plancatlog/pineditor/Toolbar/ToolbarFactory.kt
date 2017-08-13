@@ -1,14 +1,12 @@
 package com.plancatlog.pineditor.Toolbar
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Rect
-import android.text.Layout
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import com.plancatlog.pineditor.R
+import com.plancatlog.pineditor.Toolbar.Image.ToolbarImage
 import kotlinx.android.synthetic.main.activity_editor.view.*
 
 /**

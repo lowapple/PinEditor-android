@@ -145,4 +145,17 @@ class ComponentFactory(context: Context) {
         parent?.addView(prevComponent, p0)
         componentReload()
     }
+
+    fun lastComponentRequest() {
+        if (componentList.size != 0) {
+            val lastComponent = componentList[componentList.size - 1]
+            if (lastComponent.getType() == ComponentType.EditText)
+                (lastComponent as ComponentEditText).requestFocus()
+            else {
+                addEditText(componentList.size - 1)
+            }
+        } else {
+            addEditText(0)
+        }
+    }
 }

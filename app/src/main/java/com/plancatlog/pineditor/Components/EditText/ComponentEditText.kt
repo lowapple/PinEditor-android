@@ -35,6 +35,7 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
     fun requestFocus() {
         EditText().requestFocus()
+        lastCursor()
     }
 
     fun lastCursor() {

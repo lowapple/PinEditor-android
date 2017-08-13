@@ -12,6 +12,7 @@
             android:id="@+id/component_media_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/editor_component_bottom_size"
             android:adjustViewBounds="true"
             android:maxHeight="200dp"
             android:scaleType="fitCenter" />

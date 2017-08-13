@@ -20,7 +20,7 @@
             android:imeOptions="actionNone"
             android:inputType="text" />
 
-        <include layout="@layout/division_line" />
+        <include layout="@layout/division_toolbar_line" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,6 +39,6 @@
             android:imeOptions="actionNone"
             android:inputType="text" />
 
-        <include layout="@layout/division_line" />
+        <include layout="@layout/division_toolbar_line" />
     </LinearLayout>
 </LinearLayout>
