@@ -1,4 +1,4 @@
-package com.plancatlog.pineditor.Utils
+package com.plancatlog.pineditor.Utils.Font
 
 import android.content.Context
 import android.graphics.Typeface
@@ -20,7 +20,9 @@ class FontManager(context: Context) {
                 FontName.NanumBarunGothicLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicLight.otf")),
                 FontName.NanumBarunGothicUltraLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicUltraLight.otf")),
                 FontName.NanumGothic to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothic.otf")),
-                FontName.NanumGothicLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothicLight.otf"))
+                FontName.NanumGothicLight to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothicLight.otf")),
+                FontName.NanumBarunGothicBold to Font(Typeface.createFromAsset(context.assets, "fonts/NanumBarunGothicBold.otf")),
+                FontName.NanumGothicBold to Font(Typeface.createFromAsset(context.assets, "fonts/NanumGothicBold.otf"))
         )
 
         Log.d("Font", "Init Size ${fonts.size}")

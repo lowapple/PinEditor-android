@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.title_layout.*
 
 
 open class EditorActivity : AppCompatActivity() {
-    lateinit var editorComponents: LinearLayout
-    lateinit var editorComponentsScrollView: ScrollView
     lateinit var componentFactory: ComponentFactory
     lateinit var toolbarFactory: ToolbarFactory
     lateinit var title: EditText
@@ -28,17 +26,21 @@ open class EditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editor)
 
-        editorComponents = editor_component_contents
-        editorComponentsScrollView = editor_compoonent_contents_layout
         title = editor_title_layout_title
         subTitle = editor_title_layout_sub_title
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        toolbarFactory = ToolbarFactory(this@EditorActivity, editor_parent, editor_bottom_toolbar)
-        componentFactory = ComponentFactory(this@EditorActivity).parent(editorComponents)!!
+
+        toolbarFactory = ToolbarFactory(
+                this@EditorActivity,
+                editor_parent,
+                editor_bottom_toolbar)
+
+        componentFactory = ComponentFactory(
+                this@EditorActivity,
+                editor_component_contents)
 
         editor_enter_component.setOnClickListener {
             componentFactory.lastComponentRequest()
-            if(inputMethodManager.)
             inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         }
 

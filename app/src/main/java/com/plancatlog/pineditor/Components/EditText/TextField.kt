@@ -1,15 +1,20 @@
 package com.plancatlog.pineditor.Components.EditText
 
 import android.content.Context
-import android.graphics.Typeface
+import android.graphics.Color
 import android.widget.EditText
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
-import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-import com.plancatlog.pineditor.Utils.FontManager
-import com.plancatlog.pineditor.Utils.FontName
+import com.plancatlog.pineditor.Utils.Font.FontManager
+import com.plancatlog.pineditor.Utils.Font.FontName
+import android.text.Spannable
+import android.text.style.ForegroundColorSpan
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
+import android.text.style.StrikethroughSpan
+import android.text.style.UnderlineSpan
+
 
 open class TextField : EditText {
     enum class TextAlign {
@@ -20,6 +25,7 @@ open class TextField : EditText {
 
     lateinit var fontManager: FontManager
     var textAlign = TextAlign.LEFT
+    var textBold = false
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -39,14 +45,19 @@ open class TextField : EditText {
         this.setImeOption()
     }
 
+    private fun setImeOption() {
+        this.imeOptions = EditorInfo.IME_ACTION_NONE
+    }
+
+    private fun getSpanString() = SpannableString(this.text)
+
+    // ---
+
     fun setFont(fontName: FontName) {
         this.typeface = fontManager.getFont(fontName)!!.fontTypeface
     }
 
-    fun setImeOption() {
-        this.imeOptions = EditorInfo.IME_ACTION_NONE
-    }
-
+    // ---
     fun changeAlign(): TextAlign {
         when (textAlign) {
             TextAlign.LEFT -> {
@@ -75,5 +86,48 @@ open class TextField : EditText {
 
     fun rightAlign() {
         this.gravity = Gravity.RIGHT
+    }
+
+    // ---
+
+    fun changeBold() {
+        if (textBold) {
+            this.setFont(FontName.NanumBarunGothicLight)
+        } else {
+            this.setFont(FontName.NanumGothicBold)
+        }
+        textBold = !textBold
+    }
+
+    // ---
+
+    fun selectTextColor(color: Int) {
+        val w2s = getSpanString()
+        w2s.setSpan(ForegroundColorSpan(color), this.selectionStart, this.selectionEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.setText(w2s)
+    }
+
+    // ---
+
+    fun selectTextBackgroundColor(color: Int) {
+        val w2s = getSpanString()
+        w2s.setSpan(BackgroundColorSpan(color), this.selectionStart, this.selectionEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.setText(w2s)
+    }
+
+    // ---
+
+    fun selectTextUnderline() {
+        val w2s = getSpanString()
+        w2s.setSpan(UnderlineSpan(), this.selectionStart, this.selectionEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.setText(w2s)
+    }
+
+    // ---
+
+    fun selectTextMiddleline() {
+        val w2s = getSpanString()
+        w2s.setSpan(StrikethroughSpan(), this.selectionStart, this.selectionEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.setText(w2s)
     }
 }

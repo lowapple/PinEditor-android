@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import com.plancatlog.pineditor.Utils.GlobalData
 import com.plancatlog.pineditor.R
 import com.plancatlog.pineditor.Toolbar.Image.ToolbarImage
 import com.plancatlog.pineditor.Toolbar.TextAlign.ToolbarTextAlign
@@ -21,11 +22,12 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     var toolbarTextOption: ToolbarTextOption? = null
     var toolbarTextAlign: ToolbarTextAlign? = null
 
-    var keyboardHeight = 0
+    var keypadHeight = 0
+    var toolbarHeight: Int
+
     val activity = activity
     val toolbarLayout = toolbarLayout
     val parent = parent
-    var toolbarHeight: Int
 
     init {
         toolbarHeight = activity.resources.getDimension(R.dimen.editor_basic_toolbar_size).toInt()
@@ -87,17 +89,21 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
                         val currentKeyboardHeight = decorView.getHeight() - windowVisibleDisplayFrame.bottom
                         Log.i("Keyboard", currentKeyboardHeight.toString())
                         Log.i("HasNavBar", hasNavBar().toString())
-                        keyboardHeight = currentKeyboardHeight
+                        keypadHeight = currentKeyboardHeight
                         // 가상 버튼을 가지고 있을 때
                         // popup Window가 하단 바를 가리는것을 막음
                         if (hasNavBar())
-                            keyboardHeight -= toolbarHeight
+                            keypadHeight -= toolbarHeight
 
                         // toolbar height
-                        setToolbarPopupHeight(keyboardHeight)
+                        setToolbarPopupHeight(keypadHeight)
+
+                        GlobalData.keypadHeight = keypadHeight
+                        GlobalData.isKeypadVisible = true
                     } else if (lastVisibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX < visibleDecorViewHeight) {
                         // toolbar dismiss
                         toolbarDismiss()
+                        GlobalData.isKeypadVisible = false
                     }
                 }
                 lastVisibleDecorViewHeight = visibleDecorViewHeight

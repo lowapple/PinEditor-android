@@ -28,7 +28,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:scrollHorizontally="false"
-                android:singleLine="true"
+                android:textIsSelectable="true"
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>

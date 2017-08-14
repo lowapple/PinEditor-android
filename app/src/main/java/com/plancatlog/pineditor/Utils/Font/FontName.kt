@@ -1,4 +1,4 @@
-package com.plancatlog.pineditor.Utils
+package com.plancatlog.pineditor.Utils.Font
 
 /**
  * Created by plancatlog on 2017. 8. 8..
@@ -10,6 +10,8 @@ enum class FontName {
     NanumBarunGothic,
     NanumBarunGothicLight,
     NanumBarunGothicUltraLight,
+    NanumBarunGothicBold,
     NanumGothic,
-    NanumGothicLight
+    NanumGothicLight,
+    NanumGothicBold
 }

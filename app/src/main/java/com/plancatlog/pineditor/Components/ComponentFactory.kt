@@ -5,26 +5,20 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import android.widget.PopupWindow
 import com.plancatlog.pineditor.Components.Base.ComponentBase
 import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 import com.plancatlog.pineditor.Components.MediaImage.ComponentMediaImage
+import com.plancatlog.pineditor.Utils.GlobalData
 import com.plancatlog.pineditor.R
-import com.plancatlog.pineditor.Toolbar.ToolbarFactory
 
 /**
  * Created by plancatlog on 2017. 8. 3..
  */
 
-class ComponentFactory(context: Context) {
-    companion object {
-        var currentComponent: ComponentBase? = null
-    }
-
-    private var parent: LinearLayout? = null
+class ComponentFactory(context: Context, parent: LinearLayout) {
+    private var parent = parent
     private var context: Context? = null
 
     val componentList = arrayListOf<ComponentBase>()
@@ -33,21 +27,15 @@ class ComponentFactory(context: Context) {
         this.context = context
     }
 
-    fun parent(linearLayout: LinearLayout): ComponentFactory? {
-        this.parent = linearLayout
-        return this
-    }
-
     fun addEditText(childN: Int): Boolean {
-        if (context != null && parent != null) {
+        if (context != null) {
             val component = ComponentEditText(context!!)
             val view = component.getView()
             view?.setTag(component)
 
             component.EditText().setOnClickListener {
-                currentComponent = component
+                GlobalData.lastComponent = component
             }
-            component.EditText().setImeOption()
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
                 Log.i("Action Listener", i.toString())
                 if (i == EditorInfo.IME_NULL) {
@@ -122,27 +110,27 @@ class ComponentFactory(context: Context) {
 
     fun addView(view: View, childN: Int) {
         if (componentList.size >= childN)
-            parent?.addView(view, childN)
+            parent.addView(view, childN)
     }
 
     fun removeView(view: View) {
-        parent?.removeView(view)
+        parent.removeView(view)
     }
 
     fun indexOfChild(view: View): Int {
-        return parent!!.indexOfChild(view)
+        return parent.indexOfChild(view)
     }
 
     fun getChildAt(childN: Int): View {
-        return parent!!.getChildAt(childN)
+        return parent.getChildAt(childN)
     }
 
     fun componentReload() {
         componentList.clear()
-        if (parent!!.childCount > 0) {
-            for (i in 0..parent!!.childCount - 1) {
+        if (parent.childCount > 0) {
+            for (i in 0..parent.childCount - 1) {
                 try {
-                    val component = parent!!.getChildAt(i).getTag() as ComponentBase
+                    val component = parent.getChildAt(i).getTag() as ComponentBase
                     Log.i("Component", "Component {$i} " + component.getType().toString() + " : " + component.logString())
                     componentList.add(component)
                 } catch (e: Exception) {
@@ -155,10 +143,10 @@ class ComponentFactory(context: Context) {
     fun componentSwap(p0: Int, p1: Int) {
         val component = componentList[p0].getView()
         val prevComponent = componentList[p1].getView()
-        parent?.removeView(component)
-        parent?.removeView(prevComponent)
-        parent?.addView(component, p1 - 1)
-        parent?.addView(prevComponent, p0)
+        parent.removeView(component)
+        parent.removeView(prevComponent)
+        parent.addView(component, p1 - 1)
+        parent.addView(prevComponent, p0)
         componentReload()
     }
 

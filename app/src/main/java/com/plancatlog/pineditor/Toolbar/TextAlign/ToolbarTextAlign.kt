@@ -9,16 +9,18 @@ import com.plancatlog.pineditor.Components.ComponentFactory
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
 import com.plancatlog.pineditor.Components.EditText.TextField
 import com.plancatlog.pineditor.Toolbar.Base.ToolbarBase
+import com.plancatlog.pineditor.Utils.GlobalData
 
 /**
  * Created by plancatlog on 2017. 8. 3..
+ * 선택한 TextField라면 정렬기능 사용가능
  */
 
 class ToolbarTextAlign : ToolbarBase() {
     fun changeAlign(alignOption: TextView) {
-        if (ComponentFactory.currentComponent != null) {
-            if (ComponentFactory.currentComponent!!.getType() == ComponentType.EditText) {
-                val component = ComponentFactory.currentComponent as ComponentEditText
+        if (GlobalData.lastComponent != null) {
+            if (GlobalData.lastComponent!!.getType() == ComponentType.EditText) {
+                val component = GlobalData.lastComponent as ComponentEditText
                 val align = component.EditText().changeAlign()
 
                 when (align) {
