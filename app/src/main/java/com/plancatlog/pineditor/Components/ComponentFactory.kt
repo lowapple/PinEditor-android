@@ -33,8 +33,10 @@ class ComponentFactory(context: Context, parent: LinearLayout) {
             val view = component.getView()
             view?.setTag(component)
 
-            component.EditText().setOnClickListener {
-                GlobalData.lastComponent = component
+            component.EditText().setOnFocusChangeListener { view, b ->
+                if (b) {
+                    GlobalData.lastComponent = component
+                }
             }
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
                 Log.i("Action Listener", i.toString())
