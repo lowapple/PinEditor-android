@@ -38,6 +38,7 @@ open class EditorActivity : AppCompatActivity() {
 
         editor_enter_component.setOnClickListener {
             componentFactory.lastComponentRequest()
+            if(inputMethodManager.)
             inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         }
 

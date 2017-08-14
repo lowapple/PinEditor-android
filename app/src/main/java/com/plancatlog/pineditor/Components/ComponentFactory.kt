@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import com.plancatlog.pineditor.Components.Base.ComponentBase
@@ -43,6 +44,9 @@ class ComponentFactory(context: Context) {
             val view = component.getView()
             view?.setTag(component)
 
+            component.EditText().setOnClickListener {
+                currentComponent = component
+            }
             component.EditText().setImeOption()
             component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
                 Log.i("Action Listener", i.toString())
@@ -75,7 +79,11 @@ class ComponentFactory(context: Context) {
                                     prevComponentEditText.lastCursor()
                                 }
                             }
+                            // 마지막 컴포넌트 제거
+                            componentList.removeAt(componentList.size - 1)
                             removeView(component.getView()!!)
+
+                            Log.d("component size", componentList.size.toString())
                         }
                         return@setOnKeyListener false
                     }
@@ -155,6 +163,7 @@ class ComponentFactory(context: Context) {
     }
 
     fun lastComponentRequest() {
+        Log.d("component list", componentList.size.toString())
         if (componentList.size != 0) {
             val lastComponent = componentList[componentList.size - 1]
             if (lastComponent.getType() == ComponentType.EditText)
@@ -163,7 +172,9 @@ class ComponentFactory(context: Context) {
                 addEditText(componentList.size - 1)
             }
         } else {
+            // 마지막에 추가하고 커서를 옮김
             addEditText(0)
+            lastComponentRequest()
         }
     }
 }

@@ -29,9 +29,13 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
 
     init {
         toolbarHeight = activity.resources.getDimension(R.dimen.editor_basic_toolbar_size).toInt()
+        toolbarTextOption = ToolbarTextOption(activity.applicationContext)
+        toolbarImage = ToolbarImage(activity.applicationContext)
+        toolbarTextAlign = ToolbarTextAlign()
+
+        setToolbarTextOption()
         setToolbarImage()
         setToolbarTextAlign()
-        setToolbarTextOption()
 
         setKeyboardHeight()
     }
@@ -49,22 +53,22 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     }
 
     private fun setToolbarImage() {
-        toolbarImage = ToolbarImage(activity.applicationContext)
         toolbarLayout.editor_bottom_toolbar.toolbar_image.setOnClickListener {
+            Log.d("Toolbar", "TextImage")
             activityImageToolbar()
         }
     }
 
     private fun setToolbarTextOption() {
-        toolbarTextOption = ToolbarTextOption(activity.applicationContext)
         toolbarLayout.editor_bottom_toolbar.toolbar_text_option.setOnClickListener {
+            Log.d("Toolbar", "TextOption")
             activityTextOptionToolbar()
         }
     }
 
     private fun setToolbarTextAlign() {
-        toolbarTextAlign = ToolbarTextAlign(activity.applicationContext)
         toolbarLayout.editor_bottom_toolbar.toolbar_text_align.setOnClickListener {
+            Log.d("Toolbar", "TextAlign")
             activityTextAlignToolbar()
         }
     }
@@ -88,14 +92,27 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
                         // popup Window가 하단 바를 가리는것을 막음
                         if (hasNavBar())
                             keyboardHeight -= toolbarHeight
-                        toolbarImage?.setHeight(keyboardHeight)
+
+                        // toolbar height
+                        setToolbarPopupHeight(keyboardHeight)
                     } else if (lastVisibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX < visibleDecorViewHeight) {
-                        toolbarImage?.dismiss()
+                        // toolbar dismiss
+                        toolbarDismiss()
                     }
                 }
                 lastVisibleDecorViewHeight = visibleDecorViewHeight
             }
         })
+    }
+
+    private fun setToolbarPopupHeight(height: Int) {
+        toolbarTextOption?.setHeight(height)
+        toolbarImage?.setHeight(height)
+    }
+
+    private fun toolbarDismiss() {
+        toolbarImage?.dismiss()
+        toolbarTextOption?.dismiss()
     }
 
     // 하단에 존재하는 Software키의 유무를 파악한다

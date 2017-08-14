@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/text_option_text_color"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_option_text_color" />
@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/text_option_text_background_color"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_option_text_background_color" />
@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/text_option_text_bold"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_option_text_bold" />
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/text_option_text_underline"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_option_text_underline" />
@@ -42,7 +42,7 @@
     <TextView
         android:id="@+id/text_option_text_middleline"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_option_text_middleline" />

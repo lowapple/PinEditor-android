@@ -14,11 +14,7 @@ import com.plancatlog.pineditor.Toolbar.Base.ToolbarBase
  * Created by plancatlog on 2017. 8. 3..
  */
 
-class ToolbarTextAlign : ToolbarBase {
-    constructor(context: Context) {
-
-    }
-
+class ToolbarTextAlign : ToolbarBase() {
     fun changeAlign(alignOption: TextView) {
         if (ComponentFactory.currentComponent != null) {
             if (ComponentFactory.currentComponent!!.getType() == ComponentType.EditText) {

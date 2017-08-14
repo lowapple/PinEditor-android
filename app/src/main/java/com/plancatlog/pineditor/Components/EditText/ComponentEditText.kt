@@ -31,9 +31,6 @@ open class ComponentEditText(context: Context) : ComponentBase() {
 
         // Set
         editText = getView()!!.component_edittext
-        editText.setOnClickListener {
-            ComponentFactory.currentComponent = this
-        }
         background = getView()!!.component_background
     }
 

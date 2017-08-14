@@ -18,7 +18,6 @@ open class ToolbarBase {
     var toolbarView: View? = null
     var toolbarPopup: PopupWindow? = null
 
-
     fun setHeight(keyboardHeight: Int) {
         toolbarPopup?.animationStyle = -1
         toolbarPopup?.height = keyboardHeight
@@ -28,8 +27,7 @@ open class ToolbarBase {
         toolbarPopup?.dismiss()
     }
 
-    open fun activity(parent: View? = null) {
-        if (parent != null)
-            toolbarPopup?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
+    fun activity(parent: View? = null) {
+        toolbarPopup?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
     }
 }

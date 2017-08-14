@@ -22,23 +22,25 @@
             <TextView
                 android:id="@+id/toolbar_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="이미지" />
 
+
             <TextView
                 android:id="@+id/toolbar_text_option"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:gravity="center"
                 android:text="텍스트" />
 
             <TextView
                 android:id="@+id/toolbar_text_align"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="좌 정렬" />
