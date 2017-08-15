@@ -51,6 +51,16 @@ open class TextField : EditText {
 
     private fun getSpanString() = SpannableString(this.text)
 
+    fun fromEnterToStart(): String {
+        val currentString = text.toString()
+        return currentString.substring(0, this.selectionStart)
+    }
+
+    fun fromEnterToEnd(): String {
+        val currentString = text.toString()
+        return currentString.substring(this.selectionStart, currentString.length)
+    }
+
     // ---
 
     fun setFont(fontName: FontName) {
@@ -58,6 +68,7 @@ open class TextField : EditText {
     }
 
     // ---
+
     fun changeAlign(): TextAlign {
         when (textAlign) {
             TextAlign.LEFT -> {

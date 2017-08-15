@@ -13,79 +13,84 @@ import com.plancatlog.pineditor.Components.MediaImage.ComponentMediaImage
 import com.plancatlog.pineditor.Utils.GlobalData
 import com.plancatlog.pineditor.R
 
-/**
- * Created by plancatlog on 2017. 8. 3..
- */
-
 class ComponentFactory(context: Context, parent: LinearLayout) {
     private var parent = parent
-    private var context: Context? = null
+    private var context = context
 
     val componentList = arrayListOf<ComponentBase>()
 
     init {
-        this.context = context
+
     }
 
     fun addEditText(childN: Int): Boolean {
-        if (context != null) {
-            val component = ComponentEditText(context!!)
-            val view = component.getView()
-            view?.setTag(component)
+        val component = ComponentEditText(context)
+        val view = component.getView()
+        view?.setTag(component)
 
-            component.EditText().setOnFocusChangeListener { view, b ->
-                if (b) {
-                    GlobalData.lastComponent = component
-                }
+        component.EditText().setOnFocusChangeListener { view, b ->
+            if (b) {
+                GlobalData.lastComponent = component
             }
-            component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
-                Log.i("Action Listener", i.toString())
-                if (i == EditorInfo.IME_NULL) {
-                    val componentIdx = indexOfChild(view!!)
-                    this.addEditText(componentIdx + 1)
-                    val nextComponent = componentList[componentIdx + 1]
-                    if (nextComponent.getType() == ComponentType.EditText)
-                        (nextComponent as ComponentEditText).requestFocus()
-                    return@setOnEditorActionListener false
-                }
-                return@setOnEditorActionListener false
-            }
-            component.EditText().setOnKeyListener { editText, i, keyEvent ->
-                Log.i("KeyEvent listener", "key enter")
-                if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
-                    Log.i("KeyEvent action", keyEvent!!.action.toString())
-                    val componentIdx = indexOfChild(view!!)
-                    if (i == KeyEvent.KEYCODE_DEL) {
-                        Log.i("KeyEvent del", i.toString())
-                        val editTextString = component.EditText().text.toString()
-                        val editTextCount = editTextString.length
-                        if (editTextCount < 1) {
-                            // 현재 ComponentEditor가 첫번째에 위치하지 않으면
-                            if (componentIdx > 0) {
-                                val prevComponent = componentList[componentIdx - 1]
-                                if (prevComponent.getType() == ComponentType.EditText) {
-                                    val prevComponentEditText = (prevComponent as ComponentEditText)
-                                    prevComponentEditText.requestFocus()
-                                    prevComponentEditText.lastCursor()
-                                }
-                            }
-                            // 마지막 컴포넌트 제거
-                            componentList.removeAt(componentList.size - 1)
-                            removeView(component.getView()!!)
-
-                            Log.d("component size", componentList.size.toString())
-                        }
-                        return@setOnKeyListener false
-                    }
-                }
-                return@setOnKeyListener false
-            }
-
-            this.addView(view!!, childN)
-            this.componentReload()
-            return true
         }
-        return false
+        component.EditText().setOnEditorActionListener { textView, i, keyEvent ->
+            Log.i("Action Listener", i.toString())
+            if (i == EditorInfo.IME_NULL) {
+                val componentIdx = indexOfChild(view!!)
+                addEditText(componentIdx + 1)
+                val nextComponent = componentList[componentIdx + 1]
+                if (nextComponent.getType() == ComponentType.EditText) {
+                    val prevString = component.EditText().fromEnterToStart()
+                    // 엔터 후 텍스트가 남아 있다면
+                    val nextString = component.EditText().fromEnterToEnd()
+                    val nextSize = nextString.length
+                    val editText = (nextComponent as ComponentEditText)
+                    editText.requestFocus()
+
+                    if (nextSize > 0) {
+                        component.EditText().setText(prevString as CharSequence)
+                        editText.EditText().setText(nextString as CharSequence)
+                        editText.startCursor()
+                    } else {
+                        editText.endCursor()
+                    }
+
+                    return@setOnEditorActionListener true
+                }
+            }
+            return@setOnEditorActionListener false
+        }
+        component.EditText().setOnKeyListener { editText, i, keyEvent ->
+            if (keyEvent!!.action == KeyEvent.ACTION_DOWN) {
+                val componentIdx = indexOfChild(view!!)
+                if (i == KeyEvent.KEYCODE_DEL) {
+                    // 맨 처음에 커서가 위치되어 있으면
+                    if (component.EditText().selectionStart == 0) {
+                        val componentString = component.EditText().fromEnterToEnd()
+                        if (componentIdx > 0) {
+                            val prevComponent = componentList[componentIdx - 1]
+                            if (prevComponent.getType() == ComponentType.EditText) {
+                                val prevComponentEditText = (prevComponent as ComponentEditText)
+                                val prevComponentString = prevComponentEditText.EditText().text.toString()
+                                prevComponentEditText.EditText().setText(prevComponentString.plus(componentString))
+                                prevComponent.requestFocus()
+                                prevComponent.indexCursor(prevComponentString.length)
+                            }
+                            if (componentList.size > 1) {
+                                componentList.removeAt(componentList.size - 1)
+                                removeView(component.getView()!!)
+                            }
+                        }
+                    }
+                    return@setOnKeyListener false
+                }
+            }
+            return@setOnKeyListener false
+        }
+
+        this.addView(view!!, childN)
+        this.componentReload()
+        return true
     }
 
     fun addMediaImage(childN: Int): Boolean {

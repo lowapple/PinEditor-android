@@ -12,6 +12,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.plancatlog.pineditor.Toolbar.ToolbarFactory
+import com.plancatlog.pineditor.Utils.GlobalData
 import kotlinx.android.synthetic.main.title_layout.*
 
 
@@ -41,7 +42,8 @@ open class EditorActivity : AppCompatActivity() {
 
         editor_enter_component.setOnClickListener {
             componentFactory.lastComponentRequest()
-            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+            if (!GlobalData.isKeypadVisible)
+                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         }
 
         componentFactory.addEditText(0)

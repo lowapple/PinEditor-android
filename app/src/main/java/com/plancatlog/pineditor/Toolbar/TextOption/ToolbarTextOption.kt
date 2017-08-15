@@ -94,16 +94,19 @@ class ToolbarTextOption(context: Context) : ToolbarBase() {
         }
         // text underline
         textOption.text_option_text_underline.setOnClickListener {
-            val editText = getEditText()
+            val editText = getComponent()
             if (editText != null) {
-                editText.selectTextUnderline()
+                editText.EditText().selectTextUnderline()
+                editText.selectEndCursor()
+
             }
         }
         // text strikeline
         textOption.text_option_text_middleline.setOnClickListener {
-            val editText = getEditText()
+            val editText = getComponent()
             if (editText != null) {
-                editText.selectTextMiddleline()
+                editText.EditText().selectTextMiddleline()
+                editText.selectEndCursor()
             }
         }
     }
@@ -157,6 +160,16 @@ class ToolbarTextOption(context: Context) : ToolbarBase() {
             else
                 editText.selectTextBackgroundColor(selectTextColor)
         }
+    }
+
+    fun getComponent(): ComponentEditText? {
+        val lastComponent = GlobalData.lastComponent
+        if (lastComponent != null) {
+            if (lastComponent.getType() == ComponentType.EditText) {
+                return lastComponent as ComponentEditText
+            }
+        }
+        return null
     }
 
     fun getEditText(): TextField? {

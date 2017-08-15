@@ -1,6 +1,7 @@
 package com.plancatlog.pineditor.Components.EditText
 
 import android.content.Context
+import android.view.View
 import android.widget.LinearLayout
 import com.plancatlog.pineditor.Components.Base.ComponentBase
 import com.plancatlog.pineditor.Components.Base.ComponentType
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.editor_component_edittext.view.*
 
 open class ComponentEditText(context: Context) : ComponentBase() {
     private lateinit var editText: TextField
-    private lateinit var background: LinearLayout
+    private lateinit var background: View
 
     init {
         this.init(context)
@@ -38,7 +39,23 @@ open class ComponentEditText(context: Context) : ComponentBase() {
         EditText().requestFocus()
     }
 
-    fun lastCursor() {
+    fun indexCursor(index: Int) {
+        EditText().setSelection(index)
+    }
+
+    fun endCursor() {
         EditText().setSelection(EditText().length())
+    }
+
+    fun startCursor() {
+        EditText().setSelection(0)
+    }
+
+    fun selectStartCursor() {
+        EditText().setSelection(EditText().selectionStart)
+    }
+
+    fun selectEndCursor() {
+        EditText().setSelection(EditText().selectionEnd)
     }
 }

@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/component_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,11 +25,10 @@
                 android:layout_marginBottom="@dimen/editor_component_bottom_size"
                 android:background="@null"
                 android:imeOptions="actionNone"
-                android:inputType="text"
-                android:maxLines="1"
+                android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
                 android:textIsSelectable="true"
                 android:textSize="16dp" />
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>
