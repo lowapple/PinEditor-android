@@ -1,10 +1,13 @@
 package com.plancatlog.pineditor.Toolbar
 
 import android.app.Activity
+import android.app.LoaderManager
+import android.database.Cursor
 import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import com.plancatlog.pineditor.EditorActivity
 import com.plancatlog.pineditor.Utils.GlobalData
 import com.plancatlog.pineditor.R
 import com.plancatlog.pineditor.Toolbar.Image.ToolbarImage
@@ -17,7 +20,7 @@ import kotlinx.android.synthetic.main.bottom_toolbar.view.*
  * Created by plancatlog on 2017. 8. 13..
  */
 
-class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
+class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View) {
     var toolbarImage: ToolbarImage? = null
     var toolbarTextOption: ToolbarTextOption? = null
     var toolbarTextAlign: ToolbarTextAlign? = null
@@ -32,7 +35,7 @@ class ToolbarFactory(activity: Activity, parent: View, toolbarLayout: View) {
     init {
         toolbarHeight = activity.resources.getDimension(R.dimen.editor_basic_toolbar_size).toInt()
         toolbarTextOption = ToolbarTextOption(activity.applicationContext)
-        toolbarImage = ToolbarImage(activity.applicationContext)
+        toolbarImage = ToolbarImage(activity)
         toolbarTextAlign = ToolbarTextAlign()
 
         setToolbarTextOption()

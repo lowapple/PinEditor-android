@@ -19,8 +19,7 @@ class ImageFrame : FrameLayout {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(widthMeasureSpec, widthMeasureSpec)
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {

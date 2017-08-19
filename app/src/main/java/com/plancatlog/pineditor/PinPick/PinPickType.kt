@@ -1,4 +1,4 @@
-package com.plancatlog.pineditor.Toolbar.Image
+package com.plancatlog.pineditor.PinPick
 
 enum class PinPickType {
     IMAGE,

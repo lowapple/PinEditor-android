@@ -1,6 +1,7 @@
 package com.plancatlog.pineditor.Utils
 
 import android.app.Activity
+import android.app.LoaderManager
 import com.plancatlog.pineditor.Components.Base.ComponentBase
 
 /**
@@ -14,5 +15,7 @@ class GlobalData {
         var isKeypadVisible = false
         // component data
         var lastComponent: ComponentBase? = null
+
+        lateinit var loaderManager : LoaderManager
     }
 }

@@ -30,6 +30,7 @@ open class EditorActivity : AppCompatActivity() {
         title = editor_title_layout_title
         subTitle = editor_title_layout_sub_title
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        GlobalData.loaderManager = loaderManager
 
         toolbarFactory = ToolbarFactory(
                 this@EditorActivity,
