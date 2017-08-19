@@ -12,7 +12,6 @@ class GlobalData {
         // toolbar data
         var keypadHeight = 0
         var isKeypadVisible = false
-
         // component data
         var lastComponent: ComponentBase? = null
     }

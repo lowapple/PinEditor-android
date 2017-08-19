@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.plancatlog.pineditor.Toolbar.Image.ImageFrame xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ccc">
+
+    <ImageView
+        android:id="@+id/pinpick_image_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside" />
+
+</com.plancatlog.pineditor.Toolbar.Image.ImageFrame>

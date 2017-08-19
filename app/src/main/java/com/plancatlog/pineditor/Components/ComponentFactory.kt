@@ -93,26 +93,21 @@ class ComponentFactory(context: Context, parent: LinearLayout) {
         return true
     }
 
-    fun addMediaImage(childN: Int): Boolean {
+    fun addMediaImage(childN: Int) {
         // 사진 선택 호출
         // 사진 is not null
         // Add View
         // else
         // return
 
-        if (context != null && parent != null) {
-            val component = ComponentMediaImage(context!!)
-            val view = component.getView()
-            view!!.setTag(component)
+        val component = ComponentMediaImage(context)
+        val view = component.getView()
+        view!!.setTag(component)
 
-            // ===== SetImage
-            component.setImage(R.drawable.test1)
+        component.setImage(R.drawable.test1)
 
-            this.addView(view, childN)
-            this.componentReload()
-            return true
-        }
-        return false
+        this.addView(view, childN)
+        this.componentReload()
     }
 
     fun addView(view: View, childN: Int) {

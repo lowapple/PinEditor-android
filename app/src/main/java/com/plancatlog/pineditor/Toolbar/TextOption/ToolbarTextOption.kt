@@ -149,7 +149,6 @@ class ToolbarTextOption(context: Context) : ToolbarBase() {
     }
 
     fun setTextSize() {
-
     }
 
     fun setSelectColor() {
