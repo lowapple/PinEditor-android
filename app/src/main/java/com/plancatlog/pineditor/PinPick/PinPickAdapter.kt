@@ -1,6 +1,7 @@
 package com.plancatlog.pineditor.PinPick
 
 import android.app.LoaderManager
+import android.content.Context
 import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
@@ -20,21 +21,20 @@ import com.plancatlog.pineditor.PinPick.View.PinPickHolder
  * Created by plancatlog on 2017. 8. 16..
  */
 
-class PinPickAdapter :
-        RecyclerView.Adapter<PinPickHolder>,
+class PinPickAdapter(activity: EditorActivity) :
+        RecyclerView.Adapter<PinPickHolder>(),
         PinPickHolder.OnPinPickListener {
 
     var pinpicks: ArrayList<PinPickImage>? = null
     var selected = ArrayList<PinPickHolder>()
 
-    val activity: EditorActivity
+    val activity = activity
 
     fun getItem(p0: Int) = if (pinpicks != null) pinpicks!![p0] else null
 
     override fun getItemCount(): Int = if (pinpicks != null) pinpicks!!.size else 0
 
-    constructor(activity: EditorActivity) : super() {
-        this.activity = activity
+    init {
         pinpicks = ArrayList<PinPickImage>()
         pinpicks?.add(PinPickImage(null, null, PinPickType.CAMERA))
         pinpicks?.add(PinPickImage(null, null, PinPickType.GALLERY))
@@ -59,7 +59,7 @@ class PinPickAdapter :
 
             if (imageCursor != null) {
                 var count = 0
-                while (imageCursor.moveToNext() && count < 20) {
+                while (imageCursor.moveToNext() && count < 100) {
                     val filePath = imageCursor.getString(dataColumnIndex)
                     val imageId = imageCursor.getString(idColumnIndex)
 
@@ -87,7 +87,7 @@ class PinPickAdapter :
         val thumbnailCursor = activity.contentResolver.query(
                 MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
                 projection, // Which columns to return
-                MediaStore.Images.Thumbnails.IMAGE_ID + "=?",
+                "${MediaStore.Images.Thumbnails.IMAGE_ID}=?",
                 arrayOf(imageId),
                 null)
 
@@ -121,11 +121,13 @@ class PinPickAdapter :
         }
     }
 
+    // 이미지 선택
     override fun onSelect(pinPickHolder: PinPickHolder) {
         pinPickHolder.setSelected(true, selected.size + 1);
         selected.add(pinPickHolder);
     }
 
+    // 이미지 선택 취소
     override fun onDeselect(pinPickHolder: PinPickHolder) {
         val index = selected.indexOf(pinPickHolder)
         val iter = selected.listIterator(index)
