@@ -15,7 +15,5 @@ class GlobalData {
         var isKeypadVisible = false
         // component data
         var lastComponent: ComponentBase? = null
-
-        lateinit var loaderManager : LoaderManager
     }
 }

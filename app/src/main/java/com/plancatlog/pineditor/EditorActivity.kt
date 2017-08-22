@@ -30,16 +30,17 @@ open class EditorActivity : AppCompatActivity() {
         title = editor_title_layout_title
         subTitle = editor_title_layout_sub_title
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        GlobalData.loaderManager = loaderManager
 
         toolbarFactory = ToolbarFactory(
                 this@EditorActivity,
                 editor_parent,
-                editor_bottom_toolbar)
+                editor_bottom_toolbar,
+                inputMethodManager)
 
         componentFactory = ComponentFactory(
                 this@EditorActivity,
-                editor_component_contents)
+                editor_component_contents,
+                inputMethodManager)
 
         editor_enter_component.setOnClickListener {
             componentFactory.lastComponentRequest()

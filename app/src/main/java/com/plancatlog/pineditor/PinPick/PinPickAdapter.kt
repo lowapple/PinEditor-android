@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.plancatlog.pineditor.R
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.plancatlog.pineditor.EditorActivity
 import com.plancatlog.pineditor.PinPick.Model.PinPickImage
 import com.plancatlog.pineditor.PinPick.View.PinPickHolder

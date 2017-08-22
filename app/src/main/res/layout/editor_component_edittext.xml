@@ -16,7 +16,7 @@
             android:id="@+id/component_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/component_background_edittext">
+            android:background="@null">
 
             <com.plancatlog.pineditor.Components.EditText.TextField
                 android:id="@+id/component_edittext"

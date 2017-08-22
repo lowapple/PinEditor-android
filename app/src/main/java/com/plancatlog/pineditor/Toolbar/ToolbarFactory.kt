@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.inputmethod.InputMethodManager
 import com.plancatlog.pineditor.EditorActivity
 import com.plancatlog.pineditor.Utils.GlobalData
 import com.plancatlog.pineditor.R
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.bottom_toolbar.view.*
  * Created by plancatlog on 2017. 8. 13..
  */
 
-class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View) {
+class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View, inputMethodManager: InputMethodManager) {
     var toolbarImage: ToolbarImage? = null
     var toolbarTextOption: ToolbarTextOption? = null
     var toolbarTextAlign: ToolbarTextAlign? = null
@@ -28,9 +29,10 @@ class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View
     var keypadHeight = 0
     var toolbarHeight: Int
 
-    val activity = activity
-    val toolbarLayout = toolbarLayout
-    val parent = parent
+    private val activity = activity
+    private val toolbarLayout = toolbarLayout
+    private val parent = parent
+    private val inputMethodManager = inputMethodManager
 
     init {
         toolbarHeight = activity.resources.getDimension(R.dimen.editor_basic_toolbar_size).toInt()
@@ -46,14 +48,17 @@ class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View
     }
 
     fun activityImageToolbar() {
+        showKeyboard()
         toolbarImage?.activity(parent)
     }
 
     fun activityTextOptionToolbar() {
+        showKeyboard()
         toolbarTextOption?.activity(parent)
     }
 
     fun activityTextAlignToolbar() {
+        showKeyboard()
         toolbarTextAlign?.changeAlign(toolbarLayout.editor_bottom_toolbar.toolbar_text_align)
     }
 
@@ -76,6 +81,10 @@ class ToolbarFactory(activity: EditorActivity, parent: View, toolbarLayout: View
             Log.d("Toolbar", "TextAlign")
             activityTextAlignToolbar()
         }
+    }
+
+    private fun showKeyboard() {
+        // inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
     private fun setKeyboardHeight() {
