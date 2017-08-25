@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import com.plancatlog.pineditor.Components.EditText.PinEditText
 import com.plancatlog.pineditor.Toolbar.ToolbarFactory
 import com.plancatlog.pineditor.Utils.GlobalData
 import kotlinx.android.synthetic.main.title_layout.*
@@ -19,8 +20,8 @@ import kotlinx.android.synthetic.main.title_layout.*
 open class EditorActivity : AppCompatActivity() {
     lateinit var componentFactory: ComponentFactory
     lateinit var toolbarFactory: ToolbarFactory
-    lateinit var title: EditText
-    lateinit var subTitle: EditText
+    lateinit var title: PinEditText
+    lateinit var subTitle: PinEditText
     lateinit var inputMethodManager: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

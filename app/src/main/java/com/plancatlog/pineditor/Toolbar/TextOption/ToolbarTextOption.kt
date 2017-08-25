@@ -12,7 +12,7 @@ import android.widget.PopupWindow
 import android.widget.Toolbar
 import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
-import com.plancatlog.pineditor.Components.EditText.TextField
+import com.plancatlog.pineditor.Components.EditText.PinEditText
 import com.plancatlog.pineditor.R
 import com.plancatlog.pineditor.Toolbar.Base.ToolbarBase
 import com.plancatlog.pineditor.Utils.GlobalData
@@ -25,14 +25,12 @@ import kotlinx.android.synthetic.main.text_option_color.view.*
 * */
 class ToolbarTextOption(context: Context) : ToolbarBase() {
     val context = context
-
     val textOption: View
     val textColor: View
     val textSize: View
     val textPlus: View
     val textColorView: View
     val textSizePlusView: View
-
     // Text Color or Text Background Color
     var isSelectTextColor = false
     var isSelectColor = false
@@ -171,7 +169,7 @@ class ToolbarTextOption(context: Context) : ToolbarBase() {
         return null
     }
 
-    fun getEditText(): TextField? {
+    fun getEditText(): PinEditText? {
         val lastComponent = GlobalData.lastComponent
         if (lastComponent != null) {
             if (lastComponent.getType() == ComponentType.EditText) {

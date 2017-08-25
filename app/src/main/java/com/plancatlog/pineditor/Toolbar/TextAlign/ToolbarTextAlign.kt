@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.plancatlog.pineditor.Components.Base.ComponentType
 import com.plancatlog.pineditor.Components.ComponentFactory
 import com.plancatlog.pineditor.Components.EditText.ComponentEditText
-import com.plancatlog.pineditor.Components.EditText.TextField
+import com.plancatlog.pineditor.Components.EditText.PinEditText
 import com.plancatlog.pineditor.Toolbar.Base.ToolbarBase
 import com.plancatlog.pineditor.Utils.GlobalData
 
@@ -24,13 +24,13 @@ class ToolbarTextAlign : ToolbarBase() {
                 val align = component.EditText().changeAlign()
 
                 when (align) {
-                    TextField.TextAlign.LEFT -> {
+                    PinEditText.TextAlign.LEFT -> {
                         alignOption.text = "좌 정렬"
                     }
-                    TextField.TextAlign.CENTER -> {
+                    PinEditText.TextAlign.CENTER -> {
                         alignOption.text = "가운데 정렬"
                     }
-                    TextField.TextAlign.RIGHT -> {
+                    PinEditText.TextAlign.RIGHT -> {
                         alignOption.text = "우 정렬"
                     }
                 }

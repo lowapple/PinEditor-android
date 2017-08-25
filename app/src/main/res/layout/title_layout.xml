@@ -11,7 +11,7 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <com.plancatlog.pineditor.Components.EditText.TextField
+        <com.plancatlog.pineditor.Components.EditText.PinEditText
             android:id="@+id/editor_title_layout_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,7 +30,7 @@
         android:paddingLeft="@dimen/editor_basic_padding"
         android:paddingRight="@dimen/editor_basic_padding">
 
-        <com.plancatlog.pineditor.Components.EditText.TextField
+        <com.plancatlog.pineditor.Components.EditText.PinEditText
             android:id="@+id/editor_title_layout_sub_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

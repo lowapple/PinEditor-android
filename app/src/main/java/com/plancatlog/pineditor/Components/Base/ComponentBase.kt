@@ -14,6 +14,7 @@ open class ComponentBase {
     private lateinit var li: LayoutInflater
     private var componentType = ComponentType.None
     private var componentView: View? = null
+    var componentIndex = -1
 
     fun logString(): String {
         when (getType()) {

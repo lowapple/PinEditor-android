@@ -14,9 +14,10 @@ import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
 import android.text.style.StrikethroughSpan
 import android.text.style.UnderlineSpan
+import com.plancatlog.pineditor.Components.ComponentFactory
 
 
-open class TextField : EditText {
+open class PinEditText : EditText {
     enum class TextAlign {
         LEFT,
         CENTER,
@@ -43,6 +44,8 @@ open class TextField : EditText {
         fontManager = FontManager.GetInstance(context)
         this.setFont(FontName.NanumBarunGothicUltraLight)
         this.setImeOption()
+
+
     }
 
     private fun setImeOption() {
